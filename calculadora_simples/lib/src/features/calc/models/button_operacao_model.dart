@@ -30,8 +30,8 @@ class ButtonOperacaoModel {
         return "=";
       case ButtonOperacoes.virgula:
         return ",";
-      default:
-        return "";
+      case ButtonOperacoes.apagar:
+        return "apagar";
     }
   }
 

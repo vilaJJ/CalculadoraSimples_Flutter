@@ -1,10 +1,12 @@
 import 'package:calculadora_simples/src/features/calc/components/button_numero_component.dart';
 import 'package:calculadora_simples/src/features/calc/components/button_operacao_component.dart';
+import 'package:calculadora_simples/src/features/calc/controllers/calc_controller.dart';
 import 'package:calculadora_simples/src/features/calc/models/button_numero_model.dart';
 import 'package:calculadora_simples/src/features/calc/models/button_operacao_model.dart';
 import 'package:calculadora_simples/src/features/calc/models/enums/button_operacoes_enum.dart';
 import 'package:calculadora_simples/src/shared/device/screen_size.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CalcPage extends StatefulWidget {
   const CalcPage({super.key});
@@ -14,6 +16,14 @@ class CalcPage extends StatefulWidget {
 }
 
 class _CalcPageState extends State<CalcPage> {
+  late final CalcController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = context.read<CalcController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +35,24 @@ class _CalcPageState extends State<CalcPage> {
         children: [
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                
+                ListTile(
+                  shape: BeveledRectangleBorder(side: BorderSide(color: controller.obterCor(controller.valor1Ativado))),
+                  title: Text(controller.valor1Text),
+                ),
+                ListTile(
+                  shape: BeveledRectangleBorder(side: BorderSide(color: controller.obterCor(controller.operadorAtivado))),
+                  title: Text(controller.operadorText),
+                ),
+                ListTile(
+                  shape: BeveledRectangleBorder(side: BorderSide(color: controller.obterCor(controller.valor2Ativado))),
+                  title: Text(controller.valor2Text),
+                ),
+                ListTile(
+                  shape: BeveledRectangleBorder(side: BorderSide(color: controller.obterCor(controller.resultadoAtivado))),
+                  title: Text(controller.resultadoText),
+                )
               ],
             )
           ),
