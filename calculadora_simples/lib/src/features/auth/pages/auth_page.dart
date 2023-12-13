@@ -32,7 +32,7 @@ class _AuthPageState extends State<AuthPage> {
       } else if (controller.state == AuthState.sucesso) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Autenticado com sucesso.")));
-        Navigator.of(context).pushReplacementNamed("/home");
+        Navigator.of(context).pushReplacementNamed("/calc");
       }
     });
   }
@@ -56,6 +56,7 @@ class _AuthPageState extends State<AuthPage> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: ScreenSize.width(context) * 0.05),
@@ -65,6 +66,8 @@ class _AuthPageState extends State<AuthPage> {
                       padding: EdgeInsets.symmetric(
                           vertical: ScreenSize.height(context) * 0.0075),
                       child: TextField(
+                        textCapitalization: TextCapitalization.words,
+                        enabled: controller.state != AuthState.carregando,
                         focusNode: _usuarioFocus,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(
@@ -85,6 +88,7 @@ class _AuthPageState extends State<AuthPage> {
                       padding: EdgeInsets.symmetric(
                           vertical: ScreenSize.height(context) * 0.0075),
                       child: TextField(
+                        enabled: controller.state != AuthState.carregando,
                         focusNode: _senhaFocus,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(
@@ -102,6 +106,7 @@ class _AuthPageState extends State<AuthPage> {
                   ],
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: ScreenSize.height(context) * 0.05),

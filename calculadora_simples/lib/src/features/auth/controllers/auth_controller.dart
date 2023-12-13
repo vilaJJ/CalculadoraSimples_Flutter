@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AuthController extends ChangeNotifier {
   final String _usuario = "eduarda";
-  final String _senha = "eduarda123";
+  final String _senha = "123";
 
   var authRequest = AuthRequestModel('', '');
   var state = AuthState.parado;
@@ -15,7 +15,7 @@ class AuthController extends ChangeNotifier {
 
     await Future.delayed(const Duration(seconds: 1));
 
-    if (authRequest.usuario == _usuario && authRequest.senha == _senha) {
+    if (authRequest.usuario!.toLowerCase().trim() == _usuario.toLowerCase() && authRequest.senha!.toLowerCase().trim() == _senha.toLowerCase()) {
       state = AuthState.sucesso;
     } else {
       state = AuthState.erro;
