@@ -1,7 +1,8 @@
 import 'package:calculadora_simples/src/features/auth/components/auth_button_component.dart';
 import 'package:calculadora_simples/src/features/auth/controllers/auth_controller.dart';
 import 'package:calculadora_simples/src/features/auth/controllers/enums/auth_state_enum.dart';
-import 'package:calculadora_simples/src/shared/device/screen_size.dart';
+import 'package:calculadora_simples/src/shared/dispositivo/tamanho_tela.dart';
+import 'package:calculadora_simples/src/shared/vibracao/vibracao.dart';
 import 'package:calculadora_simples/src/shared/widgets/logo_app/logo_app.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,8 @@ class _AuthPageState extends State<AuthPage> {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
                 "Erro na autenticação. Verifique se os dados estão corretos.")));
+
+        Vibracao.vibrar(duracaoMS: 1000);
       } else if (controller.state == AuthState.sucesso) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Autenticado com sucesso.")));
@@ -46,25 +49,24 @@ class _AuthPageState extends State<AuthPage> {
           child: Column(
             children: [
               SizedBox(
-                  width: ScreenSize.width(context) * 0.35,
+                  width: TamanhoTela.largura(context) * 0.35,
                   child: const LogoApp()),
               Padding(
                 padding:
-                    EdgeInsets.only(bottom: ScreenSize.height(context) * 0.05),
+                    EdgeInsets.only(bottom: TamanhoTela.altura(context) * 0.05),
                 child: const Text(
                   "Faça o Login",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: ScreenSize.width(context) * 0.05),
+                    horizontal: TamanhoTela.largura(context) * 0.05),
                 child: Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: ScreenSize.height(context) * 0.0075),
+                          vertical: TamanhoTela.altura(context) * 0.0075),
                       child: TextField(
                         textCapitalization: TextCapitalization.words,
                         enabled: controller.state != AuthState.carregando,
@@ -86,7 +88,7 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: ScreenSize.height(context) * 0.0075),
+                          vertical: TamanhoTela.altura(context) * 0.0075),
                       child: TextField(
                         enabled: controller.state != AuthState.carregando,
                         focusNode: _senhaFocus,
@@ -106,12 +108,11 @@ class _AuthPageState extends State<AuthPage> {
                   ],
                 ),
               ),
-
               Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: ScreenSize.height(context) * 0.05),
+                    vertical: TamanhoTela.altura(context) * 0.05),
                 child: SizedBox(
-                    width: ScreenSize.width(context) * 0.9,
+                    width: TamanhoTela.largura(context) * 0.9,
                     child: const AuthButtonComponent()),
               )
             ],
